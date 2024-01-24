@@ -13,7 +13,7 @@ public class Main {
 
         OnlineShop.getCustomerList().add(new Customer("Ivanov Ivan", LocalDate.of(1987, 12, 9), "+9867566473", Gender.MAN));
         OnlineShop.getCustomerList().add(new Customer("Petrov Petr", LocalDate.of(1988, 12, 20), "+9867566475", Gender.MAN));
-        OnlineShop.getCustomerList().add(new Customer("Sidorova Maria", LocalDate.of(1993, 12, 20), "+9867566675", Gender.FEMALE));
+        OnlineShop.getCustomerList().add(new Customer("Sidorova Maria", LocalDate.of(1993, 12, 20), "+9867566675", Gender.WOMAN));
         OnlineShop.getProductList().add(new Product("apple", BigDecimal.valueOf(10L)));
         OnlineShop.getProductList().add(new Product("pineapple", BigDecimal.valueOf(50L)));
 
@@ -45,9 +45,8 @@ public class Main {
         System.out.println(OnlineShop.getOrderList());
         System.out.println(OnlineShop.getOrderList().size() + " orders received");
 
-        OnlineShop.congratulateWithCelebration(Celebrations.TODAY);
+        OnlineShop.congratulateWithCelebration();
         System.out.println();
-        OnlineShop.congratulateWithCelebration(Celebrations.TODAY, Gender.FEMALE);
 
     }
 

@@ -4,9 +4,11 @@ import hw4.exceptions.CustomerNotExistException;
 import hw4.exceptions.ProductNotExistException;
 import hw4.exceptions.QuantityException;
 import lombok.Data;
+import org.w3c.dom.ranges.Range;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,11 +65,9 @@ public class OnlineShop {
 
     }
 
-    public static void congratulateWithCelebration(Celebrations celebration, Gender gender){
+    private static void congratulateWithCelebration(Celebrations celebration, Gender gender){
         for (Customer customer: customerList) {
-            if (LocalDate.now().getMonth() == celebration.getDate().getMonth() &&
-                LocalDate.now().getDayOfMonth() == celebration.getDate().getDayOfMonth() &&
-                customer.getGender() == gender) {
+            if (customer.getGender() == gender) {
                 System.out.printf("%s, Congratulations with celebration: %s!\n",
                         customer.getFIO(),
                         celebration.getName());
@@ -75,11 +75,27 @@ public class OnlineShop {
         }
     }
 
-    public static void congratulateWithCelebration(Celebrations celebration){
+    private static void congratulateWithCelebration(Celebrations celebration){
         for (Customer customer: customerList) {
             System.out.printf("%s, Congratulations with celebration: %s!\n",
                     customer.getFIO(),
                     celebration.getName());
+        }
+    }
+
+    public static void congratulateWithCelebration(){
+        int dayOfMonth = LocalDate.now().getDayOfMonth();
+        Month month = LocalDate.now().getMonth();
+
+        for (Celebrations day: Celebrations.values()){
+            if (day.getDate().getDayOfMonth() == dayOfMonth &&
+            day.getDate().getMonth() == month){
+                if (day.isForGender()){
+                    congratulateWithCelebration(day, day.getGender());
+                } else {
+                    congratulateWithCelebration(day);
+                }
+            }
         }
     }
 }
