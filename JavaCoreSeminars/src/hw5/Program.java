@@ -14,8 +14,9 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 public class Program {
     public static void main(String[] args) throws IOException {
-        //taskOne(".\\backup");
+        taskOne(".\\backup");
         taskTwo();
+        taskThree(".\\taskTwo.txt .\\taskThree.txt");
     }
 
     static void taskOne(String backupDir) throws IOException {
@@ -78,5 +79,17 @@ public class Program {
             }
             System.out.println();
         }
+    }
+
+    final static String PREFIX = "prefix_";
+    static void taskThree(String files){
+        String[] namesOfFiles = files.split(" ");
+        for (String name: namesOfFiles){
+            Path path = Path.of(name);
+            if (Files.exists(path) && Files.isRegularFile(path)){
+                path.toFile().renameTo(new File(PREFIX + path.getFileName()));
+            }
+        }
+
     }
 }
